@@ -1,44 +1,55 @@
 # PR Description Generator
 
-AI-powered tool that generates professional PR descriptions from Git diffs.
+AI-powered tool that generates professional PR descriptions from git diffs using Claude.
 
-## 🚀 Deploy to Render
+## Features
 
-1. Connect this repo to Render
-2. Set environment variables:
+- 🎯 Generates clear, professional PR descriptions from diffs
+- 🚀 Supports haiku, sonnet, and opus models
+- 📊 Free tier: 10 generations/day
+- ⚡ Fast, simple API
+
+## Deployment
+
+### Render.com (Recommended)
+
+1. Push this repo to GitHub
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Create new Web Service
+4. Connect your GitHub repo
+5. Set environment variables:
    - `ANTHROPIC_API_KEY` - Your Anthropic API key
-   - `PORT` - 3000
-3. Build command: `npm install`
-4. Start command: `node index.js`
+   - `PORT` - 10000 (Render provides this)
+6. Deploy!
 
-## 🔗 API Endpoints
+### Environment Variables
 
-### POST /generate
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Yes | Your Anthropic API key |
+| `PORT` | No | Server port (default: 3000) |
+
+## API Usage
+
 ```bash
 curl -X POST https://your-service.onrender.com/generate \
   -H "Content-Type: application/json" \
-  -d '{"diff": "--- a/file.js\n+++ b/file.js\n@@ -1,3 +1,5 @@\n+const x = 1;\n+const y = 2;"}'
+  -d '{"diff": "--- a/index.js\n+++ b/index.js\n@@ -1,3 +1,5 @@\n+const foo = 'bar';\n+console.log(foo);"}'
 ```
 
 Response:
 ```json
 {
-  "success": true,
-  "description": "- Title: Add two new constants\n\n- Description: Added x and y constants to file.js for...",
-
+  "description": "## Summary\n\nThis PR adds a simple console.log example...",
+  "model": "haiku"
 }
 ```
 
-### Query Parameters
-- `diff` (required): The Git diff
-- `model` (optional): haiku, sonnet, opus (default: haiku)
-
-## 💰 Pricing
+## Pricing
 
 - **Free**: 10 generations/day
-- **Pro** ($5/mo): Unlimited generations, sonnet/opus models
-- **Team** ($15/mo): Unlimited + team management
+- **Pro**: 100 generations/day - $9/month (Gumroad link coming soon)
 
-## 📦 Products
+## License
 
-Gumroad: https://gumroad.com/l/pr-description-generator
+MIT
