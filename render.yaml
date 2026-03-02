@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: pr-description-generator
+    env: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: ANTHROPIC_API_KEY
+        sync: false
